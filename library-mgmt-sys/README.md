@@ -36,7 +36,7 @@ There are 2 custom APIs here: **Books** and **Transactions**. 'Books' manages mo
 | `POST`| `/api/transactions/borrow` | Borrow a book. |
 | `POST`| `/api/transactions/return` | Return a book. |
 
-
+### Body of 'Transactions' API;
 ```
 {
   "bookId": "...",
