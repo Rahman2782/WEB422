@@ -42,7 +42,7 @@ router.post('/return', async (req, res) => {
         book.isBorrowed = false;
         await book.save();
 
-        //Update the transaction with return date
+        //Update the transaction with dummy return date
         await Transaction.findOneAndUpdate(
             { bookId: bookId, returnDate: null },
             { returnDate: Date.now() }

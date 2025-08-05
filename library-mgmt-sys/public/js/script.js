@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const bookForm = document.getElementById('book-form');
-    const booksList = document.getElementById('books-list');
-    const bookIdInput = document.getElementById('book-id');
-    const titleInput = document.getElementById('title');
-    const authorInput = document.getElementById('author');
-    const isbnInput = document.getElementById('isbn');
-    const submitBtn = document.getElementById('submit-btn');
-    const cancelBtn = document.getElementById('cancel-btn');
+$(function() {
+    const bookForm = $('#book-form');
+    const booksList = $('#books-list');
+    const bookIdInput = $('#book-id');
+    const titleInput = $('#title');
+    const authorInput = $('#author');
+    const isbnInput = $('#isbn');
+    const submitBtn = $('#submit-btn');
+    const cancelBtn = $('#cancel-btn');
 
     // Fetch and display all books
     const fetchBooks = async () => {
@@ -20,23 +20,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderBooks = (books) => {
-        booksList.innerHTML = '';
+        booksList.empty(); // Use .empty() instead of innerHTML = ''
         books.forEach(book => {
-            const row = $('<tr>'); //create element
-            row.innerHTML = `
-                <td>${book.title}</td>
-                <td>${book.author}</td>
-                <td>${book.isbn}</td>
-                <td><span class="badge ${book.isBorrowed ? 'bg-danger' : 'bg-success'}">${book.isBorrowed ? 'Borrowed' : 'Available'}</span></td>
-                <td>
-                    <button class="btn btn-sm btn-info text-white edit-btn" data-id="${book._id}">Edit</button>
-                    <button class="btn btn-sm btn-danger delete-btn" data-id="${book._id}">Delete</button>
-                    <button class="btn btn-sm ${book.isBorrowed ? 'btn-warning' : 'btn-success'} borrow-return-btn" data-id="${book._id}" data-is-borrowed="${book.isBorrowed}">
-                        ${book.isBorrowed ? 'Return' : 'Borrow'}
-                    </button>
-                </td>
-            `;
-            booksList.appendChild(row);
+            const row = $(`
+                <tr>
+                    <td>${book.title}</td>
+                    <td>${book.author}</td>
+                    <td>${book.isbn}</td>
+                    <td><span class="badge ${book.isBorrowed ? 'bg-danger' : 'bg-success'}">${book.isBorrowed ? 'Borrowed' : 'Available'}</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-info text-white edit-btn" data-id="${book._id}">Edit</button>
+                        <button class="btn btn-sm btn-danger delete-btn" data-id="${book._id}">Delete</button>
+                        <button class="btn btn-sm ${book.isBorrowed ? 'btn-warning' : 'btn-success'} borrow-return-btn" data-id="${book._id}" data-is-borrowed="${book.isBorrowed}">
+                            ${book.isBorrowed ? 'Return' : 'Borrow'}
+                        </button>
+                    </td>
+                </tr>
+            `);
+            booksList.append(row); // Use .append() for jQuery objects
         });
 
         attachEventListeners();
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('.edit-btn').on('click', function(e) {
             const bookId = $(this).data('id');
 
-            $.get('/api/books/${bookId}')
+            $.get(`/api/books/${bookId}`)
                 .then(book => {
                     $('#book-id').val(book._id);
                     $('#title').val(book.title);
@@ -63,12 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
         // Delete button listeners
-       $('.delete-btn').on('click', async (e) => {
+       $('.delete-btn').on('click', async function() {
             const bookId = $(this).data('id');
 
-            if(confirm('Are you sure you want to delete this book?')) {
+            if (confirm('Are you sure you want to delete this book?')) {
                 try {
-                    const response = await fetch('/api/books/${bookId}', {method: 'DELETE'});
+                    const response = await fetch(`/api/books/${bookId}`, {method: 'DELETE'});
                     if(response.ok) {
                         fetchBooks(); //refreshing the list
                     } else {
@@ -84,19 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
 
         // Borrow/Return button listeners
-        $('.borrow-return-btn').on('click', async (e) => {
+        $('.borrow-return-btn').on('click', async function() {
             const bookId = $(this).data('id');
-            const isBorrowed = $(this).data('isBorrowed') === 'true';
-            const endpoint = isBorrowed ? '/api/transactions/return' : '/api/transactions/borrowed';
-
+            const isBorrowed = $(this).data('isBorrowed');
+            const endpoint = isBorrowed ? '/api/transactions/return' : '/api/transactions/borrow';
+            
             try {
-                const reponse = await fetch(endpoint, {
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ bookId, userId: 'user123' })
                 });
 
-                if (reponse.ok) {
+                if (response.ok) {
                     fetchBooks(); //refreshs list
                 } else {
                     const errorData = await response.json();
@@ -110,13 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     //handling for submission for add/update
-    bookForm.addEventListener('submit', async (e) => {
+    bookForm.on('submit', async (e) => {
         e.preventDefault();
-        const bookId = bookIdInput.value;
+        const bookId = bookIdInput.val();
         const bookData = {
-            title: titleInput.value,
-            author: authorInput.value,
-            isbn: isbnInput.value
+            title: titleInput.val(),
+            author: authorInput.val(),
+            isbn: isbnInput.val(),
         };
 
         try {
@@ -133,24 +134,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(bookData)
                 });
             }
-            bookForm.reset();
-            bookIdInput.value = '';
-            submitBtn.textContent = 'Add Book';
-            cancelBtn.style.display = 'none';
+            bookForm[0].reset();
+            bookIdInput.val('');
+            submitBtn.text('Add Book');
+            cancelBtn.hide();
             fetchBooks(); // Refresh the list
         } catch (error) {
             console.error('Error submitting form:', error);
         }
     });
 
-    // Handle cancel button
-    cancelBtn.addEventListener('click', () => {
+    //handle cancel button
+    cancelBtn.on('click', () => {
         bookForm.reset();
         bookIdInput.value = '';
         submitBtn.textContent = 'Add Book';
         cancelBtn.style.display = 'none';
     });
 
-    // Initial load
+    //initial load
     fetchBooks();
 });
