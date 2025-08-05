@@ -8,7 +8,7 @@ $(function() {
     const submitBtn = $('#submit-btn');
     const cancelBtn = $('#cancel-btn');
 
-    // Fetch and display all books
+    //displaying all books
     const fetchBooks = async () => {
         try {
             const response = await fetch('/api/books');
@@ -20,7 +20,7 @@ $(function() {
     };
 
     const renderBooks = (books) => {
-        booksList.empty(); // Use .empty() instead of innerHTML = ''
+        booksList.empty(); 
         books.forEach(book => {
             const row = $(`
                 <tr>
@@ -37,15 +37,14 @@ $(function() {
                     </td>
                 </tr>
             `);
-            booksList.append(row); // Use .append() for jQuery objects
+            booksList.append(row); 
         });
 
         attachEventListeners();
     };
 
-    // Attach event listeners for dynamic buttons
+    //attaching event listeners for dynamic buttons
     const attachEventListeners = () => {
-        // Edit button listeners
         $('.edit-btn').on('click', function(e) {
             const bookId = $(this).data('id');
 
@@ -63,7 +62,7 @@ $(function() {
             })
         })
 
-        // Delete button listeners
+        //delete button listeners
        $('.delete-btn').on('click', async function() {
             const bookId = $(this).data('id');
 
@@ -84,7 +83,7 @@ $(function() {
        })
         
 
-        // Borrow/Return button listeners
+        //borrow/return button listeners
         $('.borrow-return-btn').on('click', async function() {
             const bookId = $(this).data('id');
             const isBorrowed = $(this).data('isBorrowed');
@@ -138,7 +137,7 @@ $(function() {
             bookIdInput.val('');
             submitBtn.text('Add Book');
             cancelBtn.hide();
-            fetchBooks(); // Refresh the list
+            fetchBooks(); //refreshs list
         } catch (error) {
             console.error('Error submitting form:', error);
         }

@@ -7,6 +7,9 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+//static file served fr the frontend
+app.use(express.static('public'));
+
 //middleware
 app.use(bodyParser.json());
 app.use(cors());
@@ -23,8 +26,7 @@ const transactionRoutes = require('./routes/transactionRoutes');
 app.use('/api/books', bookRoutes);
 app.use('/api/transactions', transactionRoutes);
 
-//static file served fr the frontend
-app.use(express.static('public'));
+
 
 //middleware for error handling
 app.use((err, req, res, next) => {
