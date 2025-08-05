@@ -17,10 +17,10 @@ There are 2 custom APIs here: **Books** and **Transactions**. 'Books' manages mo
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/api/books` | Get a list of all books |
-| `GET` | `/api/books/:id` | Get a single book using its unique ID. |
+| `GET` | `/api/books/:id` | Get a single book using its unique ID |
 | `POST`| `/api/books` | Add a new book |
-| `PUT` | `/api/books/:id` | Update a book by its ID. |
-| `DELETE`| `/api/books/:id` | Delete a book by its ID. |
+| `PUT` | `/api/books/:id` | Update a book with its ID |
+| `DELETE`| `/api/books/:id` | Delete a book with its ID |
 
 ### Body of 'Books' API;
 ```
@@ -33,8 +33,8 @@ There are 2 custom APIs here: **Books** and **Transactions**. 'Books' manages mo
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `POST`| `/api/transactions/borrow` | Borrow a book. |
-| `POST`| `/api/transactions/return` | Return a book. |
+| `POST`| `/api/transactions/borrow` | Borrow a book |
+| `POST`| `/api/transactions/return` | Return a book |
 
 ### Body of 'Transactions' API;
 ```
