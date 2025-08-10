@@ -8,6 +8,7 @@ const users = [
     { username: 'Ahmed', borrowedAnything: true, borrowedDate: null }
 ];
 
+//lending book
 exports.lendBook = async (req, res) => {
     const { username } = req.body;
     const now = DateTime.now();
@@ -25,6 +26,7 @@ exports.lendBook = async (req, res) => {
     res.status(200).json('Book lent succesfully');
 };
 
+//returning book
 exports.returnBook = async (req, res) => {
     const { username } = req.body;
 
@@ -40,6 +42,7 @@ exports.returnBook = async (req, res) => {
     res.status(200).json('Book returned succesfully');
 };
 
+//checking if anything is overdue
 exports.checkOverdue = async (req, res) => {
     const { username } = req.query;
 

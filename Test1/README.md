@@ -5,10 +5,10 @@ This is a backend Node.js REST API application that implements simplistic n-memo
 **Packages Used:** Express, Luxon, body-parser, Lodash
 
 ## API Endpoints:
-'/api/users/lend'
+### '/api/users/lend'
 This is a POST method that accepts a username and the current date. By using 'if statements' I validated that the user exists and confirmed that the user does not currently have anything borrowed. If validation fails, a 404 error message is sent. If validation is successful then I used Lodash's .assign method to assign properties to the targeted user. 
  ```
-    _.assign(user, { borrowedAnything: true , borrowedDate: now.toISO() }); //updating the users record
+_.assign(user, { borrowedAnything: true , borrowedDate: now.toISO() }); //updating the users record
  ```
  In the code above, _.assign has 2 parameters, the destination object (user) and the source objects (borrowedAnything, borrowedDate)- these source properties will be copied onto the destination object. _.assign is an efficient way to update data in the in-memory array. Object.assign() is also available natively in modern JS however for the purpose of this test I chose to use Lodash instead.
  ```
@@ -34,4 +34,10 @@ If successful, something like this will be returned:
 }
 ```
 
+### '/api/users/return
+This is another POST method that takes in a username and has the current date. Validation was once again done with if statements and is the same thing as the '/lend' endpoint. This time if everything is valid, the 'borrowedAnything' value is set to false and the borrowedDate is set to 'null' to indicate that the book has been returned.
+
+
+### '/api/users/overdue
+This is a GET request that 
 
