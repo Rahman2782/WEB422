@@ -4,7 +4,6 @@ const luxon = require('luxon');
 const bodyParser = require('body-parser');
 const userRoutes = require('./src/routes/userRoutes');
 
-
 const app = express();
 const PORT = 3000;
 
