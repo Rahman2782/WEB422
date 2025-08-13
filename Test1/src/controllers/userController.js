@@ -15,11 +15,11 @@ exports.lendBook = async (req, res) => {
 
     const user = _.find(users, {username});
     if(!user) {
-        return res.status(404).json('ERROR FINDING USER');
+        return res.status(400).json('ERROR FINDING USER');
     }
 
     if(user.borrowedAnything) {
-        return res.status(404).json('ERROR USER ALREADY IS BORROWING A BOOK');
+        return res.status(400).json('ERROR USER ALREADY IS BORROWING A BOOK');
     }
 
     _.assign(user, { borrowedAnything: true , borrowedDate: now.toISO() }); //updating the users record
@@ -35,7 +35,7 @@ exports.returnBook = async (req, res) => {
         return res.status(404).json('ERROR USER NOT FOUND');
     }
     if(!user.borrowedAnything) {
-        return res.status(404).json('ERROR USER HAS NOT BORROWED ANYTHING');
+        return res.status(400).json('ERROR USER HAS NOT BORROWED ANYTHING');
     }
 
     _.assign(user, { borrowedAnything: false, borrowedDate: null});
@@ -52,7 +52,7 @@ exports.checkOverdue = async (req, res) => {
     }
 
     if(!user.borrowedAnything) {
-        return res.status(200).json(`User: ${user} has no books borrowed`);
+        return res.status(200).json(`User: ${user} has no books borrowed`); //not valid json
     }
 
     const borrowedDate = DateTime.fromISO(user.borrowedDate);
