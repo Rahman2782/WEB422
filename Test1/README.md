@@ -38,10 +38,10 @@ If successful, something like this will be returned:
 }
 ```
 
-### '/api/users/return
+### '/api/users/return'
 This is another POST method that takes in a username and has the current date. Validation was once again done with if statements and is the same thing as the '/lend' endpoint. This time if everything is valid, the 'borrowedAnything' value is set to false and the borrowedDate is set to 'null' to indicate that the book has been returned.
 
 
-### '/api/users/overdue
+### '/api/users/overdue'
 This is a GET request that checks if the user has any books borrowed for over 14 days. To achieve this I used luxon to get the current date and to format the borrowed date, then calculated the difference using the .diff method with luxon. If a book has been borrowed for over 14 days, a 200 status is sent in json format that contains the username, overdue status, borrowed date, and returned date for that book.
 
