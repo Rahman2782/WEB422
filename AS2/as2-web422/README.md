@@ -71,3 +71,4 @@ Each book in the list has buttons to "Edit" or "Delete" it from the database. Th
 - return books isnt working as intended as of this commit, return is always valid. 
 - searching by userID isnt as responsive as intended. 
 - When a book is borrowed or returned, I will add a way to make it more visual the user outside of an alert.
+- error with object destructuring for the DELETE book function (resolved, params is an object and bookId is a string, so I direclty accessed the property instead.)
