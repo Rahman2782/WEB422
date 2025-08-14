@@ -27,7 +27,7 @@ const handleBorrow = async (bookId) => {
     return;
   }
   
-  // Use a try/catch block to handle potential network errors
+  //handling network errors
   try {
     const res = await fetch('/api/borrow', {
       method: 'POST',
@@ -35,17 +35,13 @@ const handleBorrow = async (bookId) => {
       body: JSON.stringify({ bookId, userId }),
     });
 
-    if (res.ok) { // Check if the response status is 2xx
+    if (res.ok) { //status 200?
       alert('Book borrowed successfully!');
-      // You may want to re-fetch the books list here to update the UI
-      // fetchBooks();
     } else {
-      // If the response is not ok, read the error message from the response body
       const errorData = await res.json();
       alert(`Error: ${errorData.message}`);
     }
   } catch (error) {
-    // Handle network errors (e.g., server is down)
     alert('Failed to connect to the server.');
   }
 };
