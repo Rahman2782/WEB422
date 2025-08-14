@@ -1,0 +1,17 @@
+[
+  {
+    "uuid": "4f9718f6-1d19-4b3e-9e7b-83a31c5147d3",
+    "name": "Paracetamol",
+    "dateAdded": "2025-08-01T10:00:00.000Z",
+    "summary": "Pain reliever and fever reducer.",
+    "availableQuantity": 150
+  },
+  {
+    "uuid": "a78e24c9-5a6b-4c5f-8c3b-9a1f1b53e7f4",
+    "name": "Ibuprofen",
+    "dateAdded": "2025-08-02T11:30:00.000Z",
+    "summary": "Nonsteroidal anti-inflammatory drug (NSAID).",
+    "availableQuantity": 200
+  }
+]
+
