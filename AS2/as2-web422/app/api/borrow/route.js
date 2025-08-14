@@ -7,21 +7,21 @@ export async function POST(request) {
   try {
     const { bookId, userId } = await request.json();
 
-    // Check if the book is already borrowed by this user
+    //checking if the book is already borrowed by this user
     const existingTransaction = await Transaction.findOne({
       bookId: bookId,
       userId: userId,
-      returnDate: null, // Check for an active transaction
+      returnDate: null, 
     });
 
     if (existingTransaction) {
       return NextResponse.json(
         { success: false, message: 'This book is already borrowed by this user.' },
-        { status: 400 } // Use 400 Bad Request for a logical error
+        { status: 400 } 
       );
     }
 
-    // If no active transaction is found, create a new one
+    //create new transaction if none found
     const newTransaction = await Transaction.create({ bookId, userId });
 
     return NextResponse.json({ success: true, data: newTransaction }, { status: 201 });

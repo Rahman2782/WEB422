@@ -1,56 +1,54 @@
-import dbConnect from '../../../lib/dbConnect';
+// File: app/api/books/[bookId]/route.js
+
+import dbConnect from '../../../../lib/dbConnect';
 import Book from '../../../../models/Book';
+import { NextResponse } from 'next/server';
 
-export default async function handler(req, res) {
-  const {
-    query: { bookId },
-    method,
-  } = req;
-
+export async function GET(req, { params }) {
+  const { bookId } = params;
   await dbConnect();
 
-  switch (method) {
-    case 'GET':
-      try {
-        const book = await Book.findById(bookId);
-        if (!book) {
-          return res.status(404).json({ success: false, message: 'Book not found' });
-        }
-        res.status(200).json({ success: true, data: book });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+  try {
+    const book = await Book.findById(bookId);
+    if (!book) {
+      return NextResponse.json({ success: false, message: 'Book not found' }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: book });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: error.message }, { status: 400 });
+  }
+}
 
-    case 'PUT':
-      try {
-        const book = await Book.findByIdAndUpdate(bookId, req.body, {
-          new: true,
-          runValidators: true,
-        });
-        if (!book) {
-          return res.status(404).json({ success: false, message: 'Book not found' });
-        }
-        res.status(200).json({ success: true, data: book });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+export async function PUT(req, { params }) {
+  const { bookId } = params;
+  await dbConnect();
 
-    case 'DELETE':
-      try {
-        const deletedBook = await Book.deleteOne({ _id: bookId });
-        if (!deletedBook.deletedCount) {
-          return res.status(404).json({ success: false, message: 'Book not found' });
-        }
-        res.status(200).json({ success: true, data: {} });
-      } catch (error) {
-        res.status(400).json({ success: false });
-      }
-      break;
+  try {
+    const body = await req.json();
+    const book = await Book.findByIdAndUpdate(bookId, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!book) {
+      return NextResponse.json({ success: false, message: 'Book not found' }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: book });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: error.message }, { status: 400 });
+  }
+}
 
-    default:
-      res.status(400).json({ success: false });
-      break;
+export async function DELETE(req, { params }) { 
+  const bookId = params.bookId;
+  await dbConnect();
+
+  try {
+    const deletedBook = await Book.deleteOne({ _id: bookId });
+    if (!deletedBook.deletedCount) {
+      return NextResponse.json({ success: false, message: 'Book not found' }, { status: 404 });
+    }
+    return NextResponse.json({ success: true, data: {} });
+  } catch (error) {
+    return NextResponse.json({ success: false, message: error.message }, { status: 400 });
   }
 }

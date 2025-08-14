@@ -1,24 +1,20 @@
-/* Global styles for the body */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: #f8f9fa; /* A light gray background */
-  color: #343a40; /* Dark text color for readability */
+  background-color: #f8f9fa; 
+  color: #343a40; 
 }
 
-/* Header styling */
 h1 {
-  font-weight: 300; /* Lighter font weight for a modern look */
-  color: #007bff; /* Primary color from Bootstrap */
+  font-weight: 300; 
+  color: #007bff; 
   margin-bottom: 1rem;
 }
 
-/* Styling for the main content container */
 .container {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-/* Custom card styling with a subtle shadow */
 .card {
   border: none;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
@@ -26,15 +22,13 @@ h1 {
 }
 
 .card:hover {
-  transform: translateY(-5px); /* Adds a slight lift effect on hover */
+  transform: translateY(-5px); 
 }
 
-/* Form input styling */
 .form-control {
   border-radius: 0.25rem;
 }
 
-/* Link styling */
 a {
   color: #007bff;
   text-decoration: none;
