@@ -20,6 +20,9 @@ router.get('/:uuid', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  if(req.body.availableQuantity < 0) {
+    return res.status(400).send('Quantity must be over 0');
+  }
   const newDrug = {
     uuid: uuidv4(),
     name: req.body.name,

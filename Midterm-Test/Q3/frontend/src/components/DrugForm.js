@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Form, Button } from 'react-bootstrap'; 
 
 const DrugForm = ({ onSubmit, initialData = {} }) => {
   const [formData, setFormData] = useState({
@@ -26,40 +27,43 @@ const DrugForm = ({ onSubmit, initialData = {} }) => {
     setFormData({ name: '', summary: '', availableQuantity: 0 });
   };
 
+  
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input
+    <Form onSubmit={handleSubmit}>
+      <Form.Group className="mb-3">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
           required
         />
-      </div>
-      <div>
-        <label>Summary:</label>
-        <input
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Summary</Form.Label>
+        <Form.Control
           type="text"
           name="summary"
           value={formData.summary}
           onChange={handleChange}
           required
         />
-      </div>
-      <div>
-        <label>Available Quantity:</label>
-        <input
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label>Available Quantity</Form.Label>
+        <Form.Control
           type="number"
           name="availableQuantity"
           value={formData.availableQuantity}
           onChange={handleChange}
           required
         />
-      </div>
-      <button type="submit">{initialData.uuid ? 'Update Drug' : 'Add Drug'}</button>
-    </form>
+      </Form.Group>
+      <Button variant="primary" type="submit" className="w-100">
+        {initialData.uuid ? 'Update Drug' : 'Add Drug'}
+      </Button>
+    </Form>
   );
 };
 
