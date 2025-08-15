@@ -11,15 +11,32 @@ This is a full-stack web application that implements a simple Library Management
 
 ## Project Setup Instructions
 
-Clone the repository using *git clone <repository-url>*
+Clone the repository using:
+```
+*git clone <repository-url>*
+```
 
-Navigate to the project directory using *cd <project-name>*
+Navigate to the project directory using:
+``` 
+*cd <project-name>*
+```
 
-Install dependencies using *npm i* in the root directory
+Install dependencies using:
+```
+*npm i* 
+```
+in the root directory
 
-Configure your MongoDB connection by making a *.env* file in the root directory and aadding your mongodb connection string to it like this: *MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/my-database*...
+Configure your MongoDB connection by making a *.env* file in the root directory and aadding your mongodb connection string to it like this: 
+```
+*MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/my-database*...
+```
 
-Run the development server with *npm run dev* in the root directory
+Run the development server with:
+```
+*npm run dev* 
+```
+in the root directory
 
 ## API Endpoints:
 The backend is built using Next.js App Router API routes, which are defined in the app/api directory. All endpoints communicate with a mongoDB database to perform CRUD and transaction operations.
