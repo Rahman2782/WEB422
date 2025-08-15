@@ -2,8 +2,8 @@
 
 describe("Car Inventory App E2E Tests", () => {
   beforeEach(() => {
-    cy.clearLocalStorage(); // Clears localStorage before each test run
-    cy.visit("http://localhost:3000/"); // Starts on the main page, triggering initial data load
+    cy.clearLocalStorage(); 
+    cy.visit("http://localhost:3000/"); 
   });
 
   it("loads the main page and displays the header", () => {

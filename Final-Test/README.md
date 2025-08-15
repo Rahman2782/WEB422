@@ -85,5 +85,4 @@ npx cypress open
 ```
 
 this is gonna open the Cypress UI where you can select and run the E2E tests. The car.cy.js file should now be visible and runnable directly from the root.
-![cypress results](image.png)
 **4/5 TESTS PASSED SO FAR**
