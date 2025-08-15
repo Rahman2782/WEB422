@@ -75,10 +75,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
     },
     specPattern: [
-      "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}", // Default pattern
-      "car.cy.js"                           // Your test file in the root
+      "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}", 
+      "car.cy.js"                           
     ],
-    baseUrl: "http://localhost:3000", // Ensure your base URL is set correctly
+    baseUrl: "http://localhost:3000", 
   },
 });
 
