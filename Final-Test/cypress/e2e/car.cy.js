@@ -1,5 +1,3 @@
-// cypress/e2e/car.cy.js
-
 describe("Car Inventory App E2E Tests", () => {
   beforeEach(() => {
     cy.clearLocalStorage(); 
