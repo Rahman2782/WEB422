@@ -40,22 +40,26 @@ npm run dev
 
 The frontend should  be running at http://localhost:3000 - Keep this terminal open.
 
-## API Endpoints (Backend)
-- Built with Node.js and Express, with the base URL for these endpoints being http://localhost:3001/api/cars. (example)
+## API Endpoints (Backend)Built with Node.js and Express, with the base URL for these endpoints being http://localhost:3001/api/cars. (example)
 
-**GET /api/cars** -> Retrieves a list of all cars in the inventory
+**GET /api/cars** -> Retrieves a list of all cars
+- parameters: :id (int) - carID
+- 404 if not found
 
 **GET /api/cars/:id** -> retrieves a single car by its ID
-parameters: :id (integer) - The ID of the car.
-
+- parameters: :id (int) - carID
+- 404 if not found
+  
 **POST /api/cars** -> adds a new car to the inventory
-Request Body: JSON object with make, model, year, price, and color.
+- Request Body: JSON object with ```{make, model, year, price, color}``` (ALL REQUIRED)
 
 **PUT /api/cars/:id** -> updates an existing car's details by its ID
-Parameters: :id (integer) - The ID of the car to update.
+- Parameters: :id (int) - carId
+- Request Body: JSON object with ```{make, model, year, price, color}``` (OPTIONAL)
 
 **DELETE /api/cars/:id** -> Deletes a car from the inventory by its ID
-Parameters: :id (integer) - The ID of the car to delete.
+- Parameters: :id (int) - carId to be deleted
+- returns deleted car or a 404 if its not found
 
 ## Testing E2E with Cypress
 - E2E tests simulate user interactions across the app in a real browser environment, interacting with the live backend API
